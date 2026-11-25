@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #214d3d;
+  --color-brand-700: #1a3e31;
+  --color-brand-600: #2b604c;
+  --color-brand-100: #dce8e2;
+  --color-brand-50: #eef4f1;
+  --color-sage: #7f9f8c;
+  --color-sage-200: #cfdcd4;
+  --color-sage-100: #e6eee9;
+  --color-beige: #f5f0e7;
+  --color-beige-200: #e9e0cf;
+  --color-beige-50: #fbf8f3;
+  --color-ink: #1d2925;
+  --color-muted: #5b6863;
+  --color-line: #e3e7e4;
+  --font-sans: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  --font-serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+@layer base {
+  :root { color-scheme: light; }
+  html, body { background: #ffffff; color: var(--color-ink); }
+  body { margin: 0; font-family: var(--font-sans); font-size: 15px; line-height: 1.6; -webkit-text-size-adjust: 100%; overflow-x: clip; }
+  * { min-width: 0; }
+  input, select, textarea { font-size: 16px; }
+  @media (min-width: 1024px) { input, select, textarea { font-size: 15px; } }
+  :focus-visible { outline: 2px solid #2b604c; outline-offset: 2px; }
+}
+.num { font-variant-numeric: tabular-nums; }
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* A4プレビュー */
+.a4 { width: 210mm; min-height: 297mm; padding: 16mm 15mm; background: #fff; color: #1d2925; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 8px 24px rgba(0,0,0,.06); font-size: 10.5pt; line-height: 1.75; }
+.a4 h1 { font-size: 17pt; line-height: 1.35; margin: 0 0 4mm; font-family: var(--font-serif); color: #214d3d; }
+.a4 h2 { font-size: 12.5pt; margin: 6mm 0 2mm; padding-left: 3mm; border-left: 3px solid #214d3d; color: #214d3d; }
+.a4 table { width: 100%; border-collapse: collapse; margin: 2mm 0 3mm; font-size: 9.5pt; }
+.a4 th, .a4 td { border: 1px solid #d5ddd8; padding: 1.4mm 2mm; text-align: left; vertical-align: top; }
+.a4 th { background: #eef4f1; font-weight: 700; }
+.a4 td.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.a4 ul { margin: 1mm 0 2mm; padding-left: 5mm; }
+.a4 li { margin: .6mm 0; }
+.a4 .note { background: #fbf8f3; border: 1px solid #e9e0cf; border-radius: 2mm; padding: 2.5mm 3.5mm; margin: 3mm 0; font-size: 9.5pt; }
+.a4 .foot { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid #d5ddd8; font-size: 8.5pt; color: #5b6863; display: flex; justify-content: space-between; gap: 4mm; }
+.a4 .meta { display: flex; flex-wrap: wrap; gap: 2mm 6mm; font-size: 9.5pt; color: #5b6863; margin-bottom: 3mm; }
+.a4-wrap { overflow: auto; background: #eef1ef; padding: 16px; border-radius: 12px; }
+.a4-scale { transform-origin: top left; }
+
+/* 画面内の資料表示 */
+.doc { font-size: 15px; line-height: 1.8; }
+.doc h2 { font-size: 17px; margin: 18px 0 6px; padding-left: 10px; border-left: 3px solid #214d3d; color: #214d3d; font-weight: 700; }
+.doc table { width: 100%; border-collapse: collapse; margin: 6px 0 12px; font-size: 14px; }
+.doc th, .doc td { border: 1px solid #e3e7e4; padding: 6px 8px; text-align: left; vertical-align: top; }
+.doc th { background: #eef4f1; }
+.doc td.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.doc ul { margin: 4px 0 8px; padding-left: 20px; list-style: disc; }
+.doc .note { background: #fbf8f3; border: 1px solid #e9e0cf; border-radius: 10px; padding: 10px 14px; margin: 10px 0; font-size: 14px; }
+.doc p { margin: 6px 0; }
+.a4 p { margin: 1.5mm 0; }
+.a4 ul { list-style: disc; }
+
+/* 印刷（独立アプリ版） */
+#print-root { display: none; }
+@media print {
+  @page { size: A4; margin: 0; }
+  body.printing #root { display: none !important; }
+  body.printing #print-root { display: block; }
+  body.printing { background: #fff; }
+  .a4-print { box-shadow: none !important; width: 210mm; min-height: auto; margin: 0; }
+  .a4-print h2 { break-after: avoid; }
+  .a4-print tr { break-inside: avoid; }
+}
